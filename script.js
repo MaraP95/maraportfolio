@@ -3,43 +3,6 @@ const ease = "power4.inOut";
 let lastScrollPosition = 0;
 let isReversed = false;
 
-// Funções de Transição
-function revealTransition() {
-    return new Promise((resolve) => {
-        gsap.set(".block", { scaleY: 1 });
-        gsap.to(".block", {
-            scaleY: 0,
-            duration: 1,
-            stagger: {
-                each: 0.1,
-                from: "start",
-                grid: "auto",
-                axis: "x",
-            },
-            ease: ease,
-            onComplete: resolve,
-        });
-    });
-}
-
-function animateTransition() {
-    return new Promise((resolve) => {
-        gsap.set(".block", { visibility: "visible", scaleY: 0 });
-        gsap.to(".block", {
-            scaleY: 1,
-            duration: 1,
-            stagger: {
-                each: 0.1,
-                from: "start",
-                grid: [2, 5],
-                axis: "x"
-            },
-            ease: ease,
-            onComplete: resolve,
-        });
-    });
-}
-
 // Funções do Menu
 function initMenu() {
     const menuOpen = document.getElementById('menu-toggle-open');
@@ -47,7 +10,10 @@ function initMenu() {
     const menu = document.querySelector('.menu');
     const overlay = document.querySelector('.overlay');
 
+    console.log('Inicializando menu...', { menuOpen, menuClose, menu, overlay }); // Debug
+
     function openMenu() {
+        console.log('Abrindo menu'); // Debug
         gsap.to(menu, {
             duration: 0.6,
             x: "0%",
@@ -63,6 +29,7 @@ function initMenu() {
     }
 
     function closeMenu() {
+        console.log('Fechando menu'); // Debug
         gsap.to(menu, {
             duration: 0.6,
             x: "-100%",
@@ -86,234 +53,282 @@ function initMenu() {
     return { closeMenu }; // Retornar para uso em outras funções
 }
 
-// Funções da Galeria
-function initGallery() {
-    const bgColors = ["#ceba9c", "#ceba9c", "#ceba9c"];
-    const bgColorElement = document.querySelector(".bg-color");
+// Se você quiser adicionar o relógio, pode colocá-lo aqui também
+function updateClock() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  
+  const timeString = `${hours}:${minutes}:${seconds}`;
+  document.getElementById('time').textContent = timeString;
+}
 
-    function updateBackground(color) {
-        gsap.to(bgColorElement, {
-            background: `linear-gradient(0deg, ${color} 0%, rgba(252, 176, 69, 0) 100%)`,
-            duration: 1,
-            ease: "power1.out"
-        });
+setInterval(updateClock, 1000);
+updateClock();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const wrapper = document.querySelector(".wrapper");
+  const togglePointStart = window.innerHeight * 1.1; // Ponto para o fundo preto
+  const togglePointEnd = window.innerHeight * 11; // Ponto para voltar ao fundo original
+
+  function checkScroll() {
+    if (window.scrollY >= togglePointStart && window.scrollY < togglePointEnd) {
+      wrapper.classList.add("dark-theme");
+    } else {
+      wrapper.classList.remove("dark-theme");
     }
+  }
 
-    gsap.utils.toArray(".item").forEach((item, index) => {
-        const img = item.querySelector(".item-img img");
-        
-        gsap.set(img, {
-            clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-            scale: 1.25
-        });
-
-        gsap.to(img, {
-            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            ease: "power1.out",
-            duration: 1.5,
-            scrollTrigger: {
-                trigger: item,
-                start: "top center+=100",
-                end: "bottom top",
-                toggleActions: "play none none reverse",
-                onEnter: () => updateBackground(bgColors[index]),
-                onEnterBack: () => updateBackground(bgColors[index])
-            }
-        });
-    });
-}
-
-// Funções de Scroll
-function initScrollCounter() {
-    const counterElement = document.querySelector(".counter p");
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-    function updateScrollPercentage() {
-        const scrollPosition = window.scrollY;
-        const scrolledPercentage = Math.round((scrollPosition / docHeight) * 100);
-        counterElement.textContent = `${scrolledPercentage}`;
-    }
-
-    window.addEventListener("scroll", updateScrollPercentage);
-}
-
-// Funções das Tabs
-function initServiceTabs() {
-    const serviceTabs = document.querySelectorAll('.service-tab');
-    console.log('Inicializando tabs:', serviceTabs.length);
-
-    serviceTabs.forEach((tab) => {
-        const header = tab.querySelector('.service-header');
-        const content = tab.querySelector('.service-tab-content'); // Atualizado para novo nome da classe
-        const toggle = tab.querySelector('.toggle');
-        
-        // Estado inicial
-        content.style.display = 'none';
-        content.style.height = '0';
-        content.style.opacity = '0';
-
-        header.addEventListener('click', () => {
-            const isActive = tab.classList.contains('active');
-            console.log('Tab clicada, estado:', isActive);
-            
-            if (!isActive) {
-                // Fechar outras tabs
-                serviceTabs.forEach((otherTab) => {
-                    if (otherTab !== tab && otherTab.classList.contains('active')) {
-                        const otherContent = otherTab.querySelector('.service-tab-content');
-                        const otherToggle = otherTab.querySelector('.toggle');
-                        
-                        otherTab.classList.remove('active');
-                        gsap.to(otherToggle, {
-                            rotation: 0,
-                            duration: 0.3
-                        });
-                        
-                        gsap.to(otherContent, {
-                            height: 0,
-                            opacity: 0,
-                            duration: 0.3,
-                            onComplete: () => {
-                                otherContent.style.display = 'none';
-                            }
-                        });
-                    }
-                });
-
-                // Abrir tab atual
-                tab.classList.add('active');
-                content.style.display = 'block';
-                
-                // Pegar altura real
-                const height = content.scrollHeight;
-                console.log('Altura do conteúdo:', height);
-                
-                // Animar abertura
-                gsap.to(toggle, {
-                    rotation: 45,
-                    duration: 0.3
-                });
-                
-                gsap.to(content, {
-                    height: height,
-                    opacity: 1,
-                    duration: 0.3,
-                    onComplete: () => {
-                        content.style.height = 'auto';
-                    }
-                });
-            } else {
-                // Fechar tab
-                gsap.to(content, {
-                    height: 0,
-                    opacity: 0,
-                    duration: 0.3,
-                    onComplete: () => {
-                        tab.classList.remove('active');
-                        content.style.display = 'none';
-                    }
-                });
-
-                gsap.to(toggle, {
-                    rotation: 0,
-                    duration: 0.3
-                });
-            }
-        });
-    });
-}
+  window.addEventListener("scroll", checkScroll);
+});
 
 // Funções do Marquee
 function initMarquee() {
-    const marqueeContent = document.querySelector('.marquee-content');
-    const marqueeItems = document.querySelectorAll('.marquee-item');
-    
-    marqueeItems.forEach(item => {
-        const clone = item.cloneNode(true);
-        marqueeContent.appendChild(clone);
-    });
+  const marqueeContent = document.querySelector('.marquee-content');
+  const marqueeItems = document.querySelectorAll('.marquee-item');
+  
+  marqueeItems.forEach(item => {
+      const clone = item.cloneNode(true);
+      marqueeContent.appendChild(clone);
+  });
 
-    window.addEventListener('scroll', function() {
-        const st = window.scrollY || document.documentElement.scrollTop;
-        
-        if (st > lastScrollPosition) {
-            if (isReversed) {
-                marqueeContent.style.animation = 'marquee 27s linear infinite';
-                isReversed = false;
-            }
-        } else {
-            if (!isReversed) {
-                marqueeContent.style.animation = 'marquee 27s linear infinite reverse';
-                isReversed = true;
-            }
-        }
-        
-        lastScrollPosition = st <= 0 ? 0 : st;
-    });
+  window.addEventListener('scroll', function() {
+      const st = window.scrollY || document.documentElement.scrollTop;
+      
+      if (st > lastScrollPosition) {
+          if (isReversed) {
+              marqueeContent.style.animation = 'marquee 27s linear infinite';
+              isReversed = false;
+          }
+      } else {
+          if (!isReversed) {
+              marqueeContent.style.animation = 'marquee 27s linear infinite reverse';
+              isReversed = true;
+          }
+      }
+      
+      lastScrollPosition = st <= 0 ? 0 : st;
+  });
 }
 
-// Funções de Texto
-function initTextAnimations() {
-    const textElements = document.querySelectorAll('.main-title, .hero-description');
-    textElements.forEach((element, index) => {
-        const text = new SplitType(element, { types: 'chars', tagName: 'span' });
-        gsap.from(text.chars, {
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            stagger: 0.02,
-            ease: "power4.out",
-            delay: 1.5 + (index * 0.3)
-        });
-    });
+
+
+// Funções de Scroll
+function initScrollCounter() {
+  const counterElement = document.querySelector(".counter p");
+  
+  if (!counterElement) {
+      console.error('Elemento do contador não encontrado');
+      return;
+  }
+
+  function updateScrollPercentage() {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPosition = window.scrollY;
+      const scrolledPercentage = Math.min(100, Math.max(0, Math.round((scrollPosition / docHeight) * 100)));
+      
+      // Usar GSAP para animação suave
+      gsap.to(counterElement, {
+          innerText: scrolledPercentage,
+          snap: "innerText",
+          duration: 0.3,
+          ease: "power2.out"
+      });
+  }
+
+  // Atualizar no scroll
+  window.addEventListener("scroll", updateScrollPercentage);
+  
+  // Atualizar no resize da janela
+  window.addEventListener("resize", updateScrollPercentage);
+  
+  // Inicializar o contador
+  updateScrollPercentage();
 }
 
-// Inicialização Principal
+gsap.registerPlugin(ScrollTrigger);
+function addImageScaleAnimation() {
+  gsap.utils.toArray("section").forEach((section, index) => {
+    const image = document.querySelector(`#preview-${index + 1} img`);
+
+    const startCondition = index === 0 ? "top top" : "bottom bottom";
+
+    gsap.to(image, {
+      scrollTrigger: {
+        trigger: section,
+        start: startCondition,
+        end: () => {
+          const viewportHeight = window.innerHeight;
+          const sectionBottom = section.offsetTop + section.offsetHeight;
+          const additionalDistance = viewportHeight * 0.5;
+          const endValue = sectionBottom - viewportHeight + additionalDistance;
+          return `+=${endValue}`;
+        },
+        scrub: 1,
+      },
+      scale: 3,
+      ease: "none",
+    });
+  });
+}
+
+addImageScaleAnimation();
+
+function animateClipPath(
+  sectionId,
+  previewId,
+  startClipPath,
+  endClipPath,
+  start = "top center",
+  end = "bottom top"
+) {
+  let section = document.querySelector(sectionId);
+  let preview = document.querySelector(previewId);
+
+  ScrollTrigger.create({
+    trigger: section,
+    start: start,
+    end: end,
+    onEnter: () => {
+      gsap.to(preview, {
+        scrollTrigger: {
+          trigger: section,
+          start: start,
+          end: end,
+          scrub: 0.125,
+        },
+        clipPath: endClipPath,
+        ease: "none",
+      });
+    },
+  });
+}
+
+
+
+// Inicializar tudo quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
-    // Iniciar transição
-    revealTransition().then(() => {
-        gsap.set(".block", { visibility: "hidden" });
-    });
+  console.log('DOM carregado, iniciando...'); // Debug
+  
 
-    // Setup de links
-    document.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            const href = link.getAttribute("href");
+  
+  // Inicializar menu primeiro
+  initMenu();
+  
+  // Inicializar outras funções
+  initMarquee();
+  addImageScaleAnimation();
+  initScrollCounter();
+  initServiceTabs();
 
-            if (href && !href.startsWith("#") && href !== window.location.pathname) {
-                animateTransition().then(() => {
-                    window.location.href = href;
-                });
-            }
-        });
-    });
+animateClipPath(
+  "#section-1",
+  "#preview-1",
+  "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+  "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
+);
 
-    // Inicializar componentes em ordem
-    const { closeMenu } = initMenu();
-    initGallery();
-    initScrollCounter();
-    initServiceTabs();
-    initMarquee();
-    initTextAnimations();
+const totalSections = 7;
 
-    // Setup do scroll suave
-    document.querySelectorAll('.menu-items a').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const href = this.getAttribute('href');
-            const offsetTop = document.querySelector(href).offsetTop;
+for (let i = 2; i <= totalSections; i++) {
+  let currentSection = `#section-${i}`;
+  let prevPreview = `#preview-${i - 1}`;
+  let currentPreview = `#preview-${i}`;
 
-            gsap.to(window, {
-                duration: 1,
-                scrollTo: {
-                    y: offsetTop,
-                    autoKill: false
-                },
-                ease: "power2.inOut"
-            });
+  animateClipPath(
+    currentSection,
+    prevPreview,
+    "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+    "top bottom",
+    "center center"
+  );
 
-            closeMenu();
-        });
-    });
+  if (i < totalSections) {
+    animateClipPath(
+      currentSection,
+      currentPreview,
+      "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+      "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      "center center",
+      "bottom top"
+    );
+  }
+}
+
+
+
 });
+
+// Funções das Tabs
+function initServiceTabs() {
+  const serviceTabs = document.querySelectorAll('.service-tab');
+  
+  serviceTabs.forEach((tab) => {
+    const header = tab.querySelector('.service-header');
+    const content = tab.querySelector('.service-tab-content');
+    const toggle = tab.querySelector('.toggle');
+    
+    // Setup inicial do GSAP
+    gsap.set(content, {
+      height: 0,
+      opacity: 0,
+      display: 'none',
+    });
+
+    header.addEventListener('click', () => {
+      const isActive = tab.classList.contains('active');
+
+      // Fecha outras tabs abertas
+      serviceTabs.forEach((otherTab) => {
+        if (otherTab !== tab && otherTab.classList.contains('active')) {
+          const otherContent = otherTab.querySelector('.service-tab-content');
+          const otherToggle = otherTab.querySelector('.toggle');
+          
+          otherTab.classList.remove('active');
+
+          gsap.to(otherToggle, { rotate: 0, duration: 0.15 });
+          gsap.to(otherContent, {
+            height: 0,
+            opacity: 0,
+            duration: 0.3,
+            onComplete: () => gsap.set(otherContent, { display: 'none' }),
+          });
+        }
+      });
+
+      if (!isActive) {
+        // Abrindo a tab
+        tab.classList.add('active');
+        gsap.set(content, { display: 'block' });
+
+        // Calcula a altura do conteúdo
+        const targetHeight = content.scrollHeight;
+
+        gsap.to(toggle, { rotate: 45, duration: 0.15 });
+        gsap.to(content, {
+          height: targetHeight,
+          opacity: 1,
+          duration: 0.3,
+          ease: 'power2.out',
+          onComplete: () => gsap.set(content, { height: 'auto' }),
+        });
+      } else {
+        // Fechando a tab
+        gsap.to(toggle, { rotate: 0, duration: 0.15 });
+        gsap.to(content, {
+          height: 0,
+          opacity: 0,
+          duration: 0.3,
+          ease: 'power2.in',
+          onComplete: () => {
+            tab.classList.remove('active');
+            gsap.set(content, { display: 'none' });
+          },
+        });
+      }
+    });
+  });
+}
+
