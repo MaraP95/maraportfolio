@@ -66,7 +66,7 @@ function updateClock() {
 
 setInterval(updateClock, 1000);
 updateClock();
-
+//transiçao de cor 
 document.addEventListener("DOMContentLoaded", function () {
   const wrapper = document.querySelector(".wrapper");
   const togglePointStart = window.innerHeight * 1.1; // Ponto para o fundo preto
@@ -82,6 +82,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("scroll", checkScroll);
 });
+
+
+  
 
 // Funções do Marquee
 function initMarquee() {
@@ -112,7 +115,18 @@ function initMarquee() {
   });
 }
 
-
+// Alteração de cor do menu no scroll
+gsap.to('#menu-toggle-open', {
+    scrollTrigger: {
+        trigger: '.headers',
+        start: "top 80%",
+        end: "bottom 80px",
+        onEnter: () => document.getElementById('menu-toggle-open').classList.add('light-section'),
+        onLeave: () => document.getElementById('menu-toggle-open').classList.remove('light-section'),
+        onEnterBack: () => document.getElementById('menu-toggle-open').classList.add('light-section'),
+        onLeaveBack: () => document.getElementById('menu-toggle-open').classList.remove('light-section'),
+    }
+});
 
 // Funções de Scroll
 function initScrollCounter() {
@@ -205,7 +219,47 @@ function animateClipPath(
   });
 }
 
+// Modifique a função initContactAnimation no seu script.js
+function initContactAnimation() {
+    // Animação do container
+    gsap.fromTo(".contact-container",
+        { 
+            scale: 0.8,
+            opacity: 0
+        },
+        {
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            scrollTrigger: {
+                trigger: ".contact-section",
+                start: "top center",
+                end: "center center",
+                scrub: 1
+            }
+        }
+    );
 
+    // Animação dos itens de contato
+    gsap.utils.toArray('.contact-item').forEach((item, index) => {
+        gsap.fromTo(item,
+            { 
+                y: 20,
+                opacity: 0
+            },
+            {
+                y: 0,
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: ".contact-container",
+                    start: `top ${80 - (index * 5)}%`,
+                    end: `top ${60 - (index * 5)}%`,
+                    scrub: 1
+                }
+            }
+        );
+    });
+}
 
 // Inicializar tudo quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
@@ -217,10 +271,13 @@ document.addEventListener('DOMContentLoaded', function() {
   initMenu();
   
   // Inicializar outras funções
+ 
   initMarquee();
   addImageScaleAnimation();
   initScrollCounter();
   initServiceTabs();
+ // Adicione esta linha
+ initContactAnimation();
 
 animateClipPath(
   "#section-1",
