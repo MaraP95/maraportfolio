@@ -69,18 +69,40 @@ updateClock();
 //transiçao de cor 
 document.addEventListener("DOMContentLoaded", function () {
   const wrapper = document.querySelector(".wrapper");
-  const togglePointStart = window.innerHeight * 1.1; // Ponto para o fundo preto
-  const togglePointEnd = window.innerHeight * 11; // Ponto para voltar ao fundo original
+  
+  function getTogglePoints() {
+    // Check if device is mobile (you can adjust this breakpoint)
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      return {
+        start: window.innerHeight * 0.9, // Earlier start on mobile
+        end: window.innerHeight * 10.7 // Adjusted end point for mobile
+      };
+    } else {
+      return {
+        start: window.innerHeight * 0.9, // Original desktop start
+        end: window.innerHeight * 11.5 // Original desktop end
+      };
+    }
+  }
 
   function checkScroll() {
-    if (window.scrollY >= togglePointStart && window.scrollY < togglePointEnd) {
+    const points = getTogglePoints();
+    
+    if (window.scrollY >= points.start && window.scrollY < points.end) {
       wrapper.classList.add("dark-theme");
     } else {
       wrapper.classList.remove("dark-theme");
     }
   }
 
+  // Initial check
+  checkScroll();
+  
+  // Add event listeners for both scroll and resize
   window.addEventListener("scroll", checkScroll);
+  window.addEventListener("resize", checkScroll);
 });
 
 
@@ -275,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initMarquee();
   addImageScaleAnimation();
   initScrollCounter();
-  initServiceTabs();
+
  // Adicione esta linha
  initContactAnimation();
 
@@ -314,78 +336,6 @@ for (let i = 2; i <= totalSections; i++) {
   }
 }
 
-
-
 });
 
-// Funções das Tabs
-function initServiceTabs() {
-  const serviceTabs = document.querySelectorAll('.service-tab');
-  
-  serviceTabs.forEach((tab) => {
-    const header = tab.querySelector('.service-header');
-    const content = tab.querySelector('.service-tab-content');
-    const toggle = tab.querySelector('.toggle');
-    
-    // Setup inicial do GSAP
-    gsap.set(content, {
-      height: 0,
-      opacity: 0,
-      display: 'none',
-    });
-
-    header.addEventListener('click', () => {
-      const isActive = tab.classList.contains('active');
-
-      // Fecha outras tabs abertas
-      serviceTabs.forEach((otherTab) => {
-        if (otherTab !== tab && otherTab.classList.contains('active')) {
-          const otherContent = otherTab.querySelector('.service-tab-content');
-          const otherToggle = otherTab.querySelector('.toggle');
-          
-          otherTab.classList.remove('active');
-
-          gsap.to(otherToggle, { rotate: 0, duration: 0.15 });
-          gsap.to(otherContent, {
-            height: 0,
-            opacity: 0,
-            duration: 0.3,
-            onComplete: () => gsap.set(otherContent, { display: 'none' }),
-          });
-        }
-      });
-
-      if (!isActive) {
-        // Abrindo a tab
-        tab.classList.add('active');
-        gsap.set(content, { display: 'block' });
-
-        // Calcula a altura do conteúdo
-        const targetHeight = content.scrollHeight;
-
-        gsap.to(toggle, { rotate: 45, duration: 0.15 });
-        gsap.to(content, {
-          height: targetHeight,
-          opacity: 1,
-          duration: 0.3,
-          ease: 'power2.out',
-          onComplete: () => gsap.set(content, { height: 'auto' }),
-        });
-      } else {
-        // Fechando a tab
-        gsap.to(toggle, { rotate: 0, duration: 0.15 });
-        gsap.to(content, {
-          height: 0,
-          opacity: 0,
-          duration: 0.3,
-          ease: 'power2.in',
-          onComplete: () => {
-            tab.classList.remove('active');
-            gsap.set(content, { display: 'none' });
-          },
-        });
-      }
-    });
-  });
-}
 

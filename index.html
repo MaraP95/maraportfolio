@@ -9,7 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css" />
-    <style></style>
+     <!-- Favicon padrão -->
+     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+     <!-- Favicon em PNG para diferentes tamanhos -->
+     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+ 
+     <!-- Favicon para Android e dispositivos modernos -->
+     <link rel="icon" type="image/png" sizes="192x192" href="/assets/android-chrome-192x192.png">
+     <link rel="icon" type="image/png" sizes="512x512" href="/assets/android-chrome-512x512.png">
+ 
+     <!-- Apple Touch Icon -->
+     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+ 
+   
   </head>
   <body>
 
@@ -32,7 +46,7 @@
         <ul class="menu-items">
           <li><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
-          <li><a href="#">Work</a></li>
+          <li><a href="saudade.html">Work</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
         <div class="social">
@@ -44,50 +58,24 @@
     </nav>
   </header>
 
-
+  <div class="cursor-text">
+    <div class="rotating-text"></div>
+</div>
 
 <!--hero-->
   <div class="wrapper">
     <!--Relogio-->
 
-  <div class="clock">Porto, <span id="time"></span></div>
+  <div class="clock"> <span id="time"></span></div>
   
 
     <div class="text-wrapper">
       <div class="title-group">
+        <h1 class="main-title">Web Designer & Developer</h1>
       
       </div>
-      <h3 class="hero-description">I'm Mara,
+      <h3 class="hero-description">Olá, sou a Mara e especializo-me em criar websites 
         <span class="floating-icon" style="--delay: 0.5s">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pink">
-            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-            <path d="M5 3v4"/>
-            <path d="M19 17v4"/>
-            <path d="M3 5h4"/>
-            <path d="M17 19h4"/>
-          </svg>
-        </span>
-   a freelance web designer
-   <span class="floating-icon" style="--delay: 0.5s">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pink">
-      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
-      <path d="M9 18h6"/>
-      <path d="M10 22h4"/>
-    </svg>
-   </span>
-and developer specializing in creating
-<span class="floating-icon" style="--delay: 0.5s">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pink">
-    <path d="M16 4c-4-.8-8 0-8 0s1 4 8 4z"/>
-    <path d="M12 8c-5 0-8 4-8 4s.5 8 8 8 8-8 8-8-3-4-8-4z"/>
-    <path d="M12 8V4"/>
-    <path d="M4 12s-1-2 0-4"/>
-    <path d="M20 12s1-2 0-4"/>
-    <path d="m8 16 4-4 4 4"/>
-  </svg>
- </span>
-custom, unique websites 
- <span class="floating-icon" style="--delay: 0.5s">
           <!-- Globe icon -->
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pink">
             <circle cx="12" cy="12" r="10"></circle>
@@ -95,52 +83,49 @@ custom, unique websites
             <path d="M2 12h20"></path>
           </svg>
         </span>
- . I combine design and development
-<span class="floating-icon" style="--delay: 0.5s">
-    <!-- Code icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pink">
-      <polyline points="16 18 22 12 16 6"></polyline>
-      <polyline points="8 6 2 12 8 18"></polyline>
-    </svg>
-  </span>
- to deliver personalized solutions
-<span class="floating-icon" style="--delay: 0s">
-  <!-- Rocket icon -->
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pink">
-    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-  </svg>
-</span>
-, and offer an strong
-<span class="floating-icon" style="--delay: 1.5s">
-          <!-- Dumbbell icon -->
+        personalizados, dinâmicos e focados na funcionalidade. Adoro explorar interatividade e animações
+        <span class="floating-icon" style="--delay: 0.5s">
+          <!-- Code icon -->
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pink">
-            <path d="m6.5 6.5 11 11"></path>
-            <path d="m21 21-1-1"></path>
-            <path d="m3 3 1 1"></path>
-            <path d="m18 22 4-4"></path>
-            <path d="m2 6 4-4"></path>
-            <path d="m3 10 7-7"></path>
-            <path d="m14 21 7-7"></path>
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
           </svg>
         </span>
-user experience.
+        para dar vida a cada projeto, enquanto utilizo ferramentas como inteligência artificial para poupar tempo e otimizar processos
+        <span class="floating-icon" style="--delay: 0s">
+          <!-- Rocket icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pink">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+          </svg>
+        </span>
+        O meu objetivo é transformar ideias
+        <span class="floating-icon" style="--delay: 0.5s">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pink">
+            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+            <path d="M9 18h6"/>
+            <path d="M10 22h4"/>
+          </svg>
+         </span>
+       em soluções digitais impactantes, adaptadas às necessidades e essência de cada marca.
+        
+  
       </h3>
   </div>
     <div class="container">
       <div class="counter"><p>0</p></div>
       <div class="marquee-container">
         <div class="marquee-content">
-            <div class="marquee-item"><span class="plus">+</span>Projetos </div>
-            <div class="marquee-item"><span class="plus">+</span>Projetos </div>
-            <div class="marquee-item"><span class="plus">+</span>Projetos </div>
-            <div class="marquee-item"><span class="plus">+</span>Projetos </div>
-            <div class="marquee-item"><span class="plus">+</span>Projetos </div>
-            <div class="marquee-item"><span class="plus">+</span>Projetos </div>
-            <div class="marquee-item"><span class="plus">+</span>Projetos </div>
-            <div class="marquee-item"><span class="plus">+</span>Projetos </div>
+            <div class="marquee-item"><span class="plus">+</span>Web Design </div>
+            <div class="marquee-item"><span class="plus">+</span>Código </div>
+            <div class="marquee-item"><span class="plus">+</span>Interatividade </div>
+            <div class="marquee-item"><span class="plus">+</span>Marketing </div>
+            <div class="marquee-item"><span class="plus">+</span>Web Design </div>
+            <div class="marquee-item"><span class="plus">+</span>Código </div>
+            <div class="marquee-item"><span class="plus">+</span>Interatividade </div>
+            <div class="marquee-item"><span class="plus">+</span>Marketing </div>
         </div>
     </div>
   
@@ -206,64 +191,100 @@ user experience.
       </div>
     </div>
     <div class="services-tabs-wrappe">
-      <!-- Item 1 -->
-      <div class="service-tab" data-step="1">
-        <div class="service-header">
-         
-          <h3> <span class="number">01</span>Lojas e Websites à Medida</h3>
-          <span class="toggle">+</span>
-        </div>
-        <div class="service-tab-content">
-          <p class="ptabs">Desenvolvimento de plataformas 100% personalizadas, sem recorrer a templates genéricos, usando código para funcionalidades exclusivas.</p>
-        </div>
-      </div>
-
-      <!-- Item 2 -->
-      <div class="service-tab" data-step="2">
-        <div class="service-header">
-         
-          <h3> <span class="number">02</span>Desempenho & Segurança</h3>
-          <span class="toggle">+</span>
-        </div>
-        <div class="service-tab-content">
-          <p class="ptabs">Configuração de plugins e serviços especializados (Wordfence, Cloudflare, entre outros) para manter o site rápido e protegido.</p>
-        </div>
-      </div>
-
-      <!-- Item 3 -->
-      <div class="service-tab" data-step="3">
-        <div class="service-header">
-          
-          <h3><span class="number">03</span>Estratégias e Acompanhamento de Marketing</h3>
-          <span class="toggle">+</span>
-        </div>
-        <div class="service-tab-content">
-          <p class="ptabs">Apoio na definição de objectivos e criação de acções digitais para aumentar a visibilidade e atrair potenciais clientes.</p>
-        </div>
-      </div>
-
-      <!-- Item 4 -->
-      <div class="service-tab" data-step="4">
-        <div class="service-header">
-          <h3> <span class="number">04</span>Manutenção & Suporte</h3>
-          <span class="toggle">+</span>
-        </div>
-        <div class="service-tab-content">
-          <p class="ptabs">Monitorização e assistência contínua, com actualizações e correcções para garantir um funcionamento eficiente.</p>
-        </div>
-      </div>
-
-      <!-- Item 5 -->
-      <div class="service-tab" data-step="5">
-        <div class="service-header">
-          <h3><span class="number">05</span>Melhorias & Optimização Contínua</h3>
-          <span class="toggle">+</span>
-        </div>
-        <div class="service-tab-content">
-          <p class="ptabs">Introdução de novas funcionalidades, ajustes de design e actualizações estratégicas para que o projecto se mantenha moderno e competitivo.</p>
-        </div>
-      </div>
+      <div class="bg-gradient">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" id="blobSvg" filter="blur(30px)" style="opacity: 0.8">
+            <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color: rgb(248, 121, 21)"></stop>
+                    <stop offset="100%" style="stop-color: rgb(255, 201, 69)"></stop>
+                </linearGradient>
+            </defs>
+            <path id="blob" fill="url(#gradient)">
+                <animate 
+                    attributeName="d" 
+                    dur="8s" 
+                    repeatCount="indefinite"
+                    values="M421.63508,307.39005Q364.7801,364.7801,307.39005,427.43403Q250,490.08796,191.6822,428.36178Q133.3644,366.6356,70.9089,308.3178Q8.4534,250,54.21728,174.99058Q99.98115,99.98115,174.99058,81.49686Q250,63.01257,330.66021,75.84607Q411.32042,88.67958,444.90524,169.33979Q478.49006,250,421.63508,307.39005Z;M395.5,320Q390,390,320,400Q250,410,172,408Q94,406,59,328Q24,250,70.5,183.5Q117,117,183.5,108Q250,99,335,89.5Q420,80,410.5,165Q401,250,395.5,320Z;M408.24461,332.63257Q415.26513,415.26513,332.63257,434.71568Q250,454.16622,179.33614,422.74697Q108.67228,391.32772,65.87585,320.66386Q23.07942,250,63.27221,176.73251Q103.46501,103.46501,176.73251,63.02288Q250,22.58075,311.86507,74.4253Q373.73015,126.26985,387.47712,188.13493Q401.22409,250,408.24461,332.63257Z;M418.08664,320.33435Q390.6687,390.6687,320.33435,427.91946Q250,465.17023,188.27506,419.31005Q126.55013,373.44987,106.38448,311.72494Q86.21883,250,84.09726,165.98785Q81.9757,81.9757,165.98785,53.98938Q250,26.00305,311.1687,76.83282Q372.3374,127.6626,408.92099,188.8313Q445.50458,250,418.08664,320.33435Z;M421.63508,307.39005Q364.7801,364.7801,307.39005,427.43403Q250,490.08796,191.6822,428.36178Q133.3644,366.6356,70.9089,308.3178Q8.4534,250,54.21728,174.99058Q99.98115,99.98115,174.99058,81.49686Q250,63.01257,330.66021,75.84607Q411.32042,88.67958,444.90524,169.33979Q478.49006,250,421.63508,307.39005Z"
+                ></animate>
+            </path>
+        </svg>
     </div>
+
+    <div class="accordion">
+        <h1 class="heading">Serviços</h1>
+        
+
+        <!-- Lojas e Websites à Medida -->
+        <div class="accordion-item">
+            <input type="checkbox" id="item1">
+            <label class="accordion-header" for="item1">
+                <span class="accordion-title">Lojas e Websites à Medida</span>
+                <span class="toggle-icon"></span>
+            </label>
+            <div class="accordion-content">
+                <div class="accordion-text">
+                    Desenvolvimento personalizado de lojas online e websites, adaptados às suas necessidades específicas e objetivos de negócio.
+                </div>
+            </div>
+        </div>
+
+        <!-- Desempenho & Segurança -->
+        <div class="accordion-item">
+            <input type="checkbox" id="item2">
+            <label class="accordion-header" for="item2">
+                <span class="accordion-title">Desempenho & Segurança</span>
+                <span class="toggle-icon"></span>
+            </label>
+            <div class="accordion-content">
+                <div class="accordion-text">
+                    Otimização de performance e implementação de medidas de segurança robustas para proteger seu negócio online.
+                </div>
+            </div>
+        </div>
+
+        <!-- Estratégias e Acompanhamento de Marketing -->
+        <div class="accordion-item">
+            <input type="checkbox" id="item3">
+            <label class="accordion-header" for="item3">
+                <span class="accordion-title">Estratégias e Acompanhamento de Marketing</span>
+                <span class="toggle-icon"></span>
+            </label>
+            <div class="accordion-content">
+                <div class="accordion-text">
+                    Desenvolvimento e execução de estratégias de marketing digital personalizadas, com monitoramento constante de resultados.
+                </div>
+            </div>
+        </div>
+
+        <!-- Manutenção & Suporte -->
+        <div class="accordion-item">
+            <input type="checkbox" id="item4">
+            <label class="accordion-header" for="item4">
+                <span class="accordion-title">Manutenção & Suporte</span>
+                <span class="toggle-icon"></span>
+            </label>
+            <div class="accordion-content">
+                <div class="accordion-text">
+                    Suporte técnico contínuo e manutenção preventiva para garantir o funcionamento ideal de sua presença online.
+                </div>
+            </div>
+        </div>
+
+        <!-- Melhorias & Optimização Contínua -->
+        <div class="accordion-item">
+            <input type="checkbox" id="item5">
+            <label class="accordion-header" for="item5">
+                <span class="accordion-title">Melhorias & Optimização Contínua</span>
+                <span class="toggle-icon"></span>
+            </label>
+            <div class="accordion-content">
+                <div class="accordion-text">
+                    Análise constante e implementação de melhorias para manter seu site atualizado e competitivo.
+                </div>
+            </div>
+        </div>
+    </div>
+     
   </div>
 </section>
 
@@ -297,10 +318,10 @@ user experience.
                   </div>
 
                   <div class="social-links">
-                      <a href="#" class="social-link">
+                      <a href="https://www.linkedin.com/in/mara-pereira-3a86aa295/" class="social-link">
                           <i class="fab fa-linkedin"></i>
                       </a>
-                      <a href="#" class="social-link">
+                      <a href="https://github.com/MaraP95" class="social-link">
                           <i class="fab fa-github"></i>
                       </a>
                   </div>
@@ -312,7 +333,7 @@ user experience.
   </div>
 
 
-   
+  
     
           
 
@@ -321,6 +342,7 @@ user experience.
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
