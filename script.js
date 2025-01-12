@@ -337,5 +337,3 @@ for (let i = 2; i <= totalSections; i++) {
 }
 
 });
-
-
